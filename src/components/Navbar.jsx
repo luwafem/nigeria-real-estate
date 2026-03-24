@@ -30,7 +30,7 @@ const Navbar = () => {
           <div className="h-8 w-12  flex items-center justify-center overflow-hidden  transition-transform duration-700">
              <img src={siteConfig.logo} alt="Logo" className="w-12 h-8 " />
           </div>
-          <span className="text-lg font-black uppercase tracking-[0.3em] text-white">
+          <span className="text-lg font-md uppercase tracking-[0.3em] text-white">
             {siteConfig.name}
           </span>
         </Link>

@@ -25,7 +25,7 @@ const Footer = () => {
           
           {/* --- BRAND COLUMN --- */}
           <div className="lg:col-span-5">
-            <h3 className="text-lg font-black uppercase tracking-[0.3em] text-white mb-8">
+            <h3 className="text-lg font-md uppercase tracking-[0.3em] text-white mb-8">
               {siteConfig.name} 
             </h3>
             
