@@ -5,9 +5,13 @@
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <title>Legacy Estates | Architectural Excellence in Nigeria</title>
-    <meta name="description" content="Defining architectural excellence in Nigeria. Curated luxury homes, strategic lands, and secure estates." />
+    <title>Veraz Properties | Premium Real Estate in Port Harcourt</title>
+    <meta name="description" content="Discover exclusive luxury homes, strategic commercial lands, and secure gated estates in Port Harcourt. Experience the Veraz standard of architectural excellence." />
     
+    <meta property="og:title" content="Veraz Properties | Architectural Excellence" />
+    <meta property="og:description" content="Curated luxury listings in GRA, Peter Odili, and Greater Port Harcourt." />
+    <meta property="og:type" content="website" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
@@ -17,16 +21,25 @@
       html {
         scroll-behavior: smooth;
         background: #000000;
+        /* Prevent layout shift during font loading */
+        font-family: 'Inter', sans-serif;
       }
       body {
         margin: 0;
         background: #000000;
+        color: #ffffff;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
       }
-      /* Preloader hide logic if you add one later */
       #root {
         min-height: 100vh;
+      }
+      
+      /* Optional: Custom Selection Color for a premium feel */
+      ::selection {
+        background: #c5a059; /* Gold/Champagne accent */
+        color: #000;
       }
     </style>
   </head>
