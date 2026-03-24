@@ -134,21 +134,29 @@ const HomePage = () => {
 
       {/* --- BENTO GRID SECTION --- */}
       <section className="py-32 px-4 sm:px-12 max-w-[1700px] mx-auto">
-        <div className="flex flex-col lg:flex-row justify-between items-baseline gap-8 mb-24 border-b border-white/5 pb-12">
-          <h2 className="text-4xl font-light tracking-tight mb-2">Our Portfolios</h2>
+        <div className="flex flex-col lg:flex-row justify-between items-center lg:items-baseline gap-10 mb-16 md:mb-24 border-b border-white/5 pb-12">
+          {/* Title centered on mobile, left-aligned on LG */}
+          <h2 className="text-3xl md:text-4xl font-light tracking-tight text-center lg:text-left">
+            Our Portfolios
+          </h2>
           
-          <nav className="flex p-1 bg-zinc-900/40 backdrop-blur-md rounded-full border border-white/5">
-            {['estates', 'properties', 'lands'].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-10 py-4 rounded-full text-[9px] font-black uppercase tracking-[0.2em] transition-all ${
-                  activeTab === tab ? 'bg-white text-black shadow-2xl' : 'text-zinc-500 hover:text-white'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
+          {/* Navigation wrapper: w-full and centered on mobile */}
+          <nav className="flex w-full md:w-auto p-1 bg-zinc-900/40 backdrop-blur-md rounded-full border border-white/5 overflow-x-auto no-scrollbar justify-center">
+            <div className="flex gap-1">
+              {['estates', 'properties', 'lands'].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-6 md:px-10 py-3 md:py-4 rounded-full text-[8px] md:text-[9px] font-black uppercase tracking-[0.2em] transition-all whitespace-nowrap ${
+                    activeTab === tab 
+                      ? 'bg-white text-black shadow-2xl' 
+                      : 'text-zinc-500 hover:text-white'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
           </nav>
         </div>
 
