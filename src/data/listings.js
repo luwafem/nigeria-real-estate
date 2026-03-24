@@ -123,7 +123,7 @@ export const listings = [
     landSize: "5 Acres",
     status: "Available",
     description: "Prime commercial land facing the Aba Expressway. Unbeatable visibility.",
-    images: ["https://res.cloudinary.com/dqzsdgugd/image/upload/v1774257095/oakville1_krglo3.jpg"],
+    images: ["https://res.cloudinary.com/dqzsdgugd/image/upload/v1716806782/LCRNG%20IMAGES/quemo3_au7sjq.png"],
     features: ["Expressway Frontage", "C of O", "High Traffic Zone"],
     agent: "Chidi Amadi",
     isFeatured: false,
@@ -219,7 +219,7 @@ export const listings = [
     landSize: "1 Plot",
     status: "Available",
     description: "Rare opportunity to own a waterfront plot in the serene Eagle Island neighborhood.",
-    images: ["https://res.cloudinary.com/dqzsdgugd/image/upload/v1770414061/cityview-gousa_dsucdx.png"],
+    images: ["https://res.cloudinary.com/dqzsdgugd/image/upload/v1716806577/LCRNG%20IMAGES/lak3_kow6tc.png"],
     features: ["Waterfront View", "Quiet Neighborhood", "Established Title"],
     agent: "Chidi Amadi",
     isFeatured: false,
@@ -240,3 +240,5 @@ export const listings = [
     isFeatured: false,
   }
 ];
+
+export const getListingById = (id) => listings.find(listing => listing.id === id);
