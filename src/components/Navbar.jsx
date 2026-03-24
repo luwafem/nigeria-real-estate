@@ -6,12 +6,20 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Handle scroll effect for glass background
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isOpen]);
 
   const navLinks = [
     { name: 'Portfolio', path: '/properties' },
@@ -21,25 +29,23 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed top-0 w-full z-[100] transition-all duration-500 ${
-      scrolled ? 'py-4' : 'py-8'
+      scrolled ? 'py-3 md:py-4 bg-black/20 backdrop-blur-lg' : 'py-6 md:py-8 bg-transparent'
     }`}>
-      <div className="max-w-[1440px] mx-auto px-6 flex justify-between items-center">
+      <div className="max-w-[1440px] mx-auto px-5 md:px-12 flex justify-between items-center">
         
-        {/* --- LOGO --- */}
-        <Link to="/" className="relative z-[110] flex items-center gap-3 group">
-          <div className="h-8 w-12  flex items-center justify-center overflow-hidden  transition-transform duration-700">
-             <img src={siteConfig.logo} alt="Logo" className="w-12 h-8 " />
+        {/* --- LOGO: Scale text for small devices --- */}
+        <Link to="/" className="relative z-[110] flex items-center gap-2 md:gap-3 group">
+          <div className="h-6 md:h-8 w-10 md:w-12 flex items-center justify-center transition-transform duration-700 group-hover:scale-110">
+             <img src={siteConfig.logo} alt="Logo" className="w-full h-full object-contain" />
           </div>
-          <span className="text-lg font-md uppercase tracking-[0.3em] text-white">
+          <span className="text-sm md:text-lg font-medium uppercase tracking-[0.2em] md:tracking-[0.3em] text-white">
             {siteConfig.name}
           </span>
         </Link>
 
-        {/* --- DESKTOP MENU (Floating Pill) --- */}
+        {/* --- DESKTOP MENU --- */}
         <div className={`hidden md:flex items-center gap-1 px-2 py-1.5 rounded-full border transition-all duration-500 ${
-          scrolled 
-          ? 'bg-black/40 backdrop-blur-2xl border-white/10' 
-          : 'bg-transparent border-transparent'
+          scrolled ? 'bg-black/40 backdrop-blur-2xl border-white/10' : 'bg-transparent border-transparent'
         }`}>
           {navLinks.map((link) => (
             <NavLink
@@ -55,53 +61,63 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* --- ACTION BUTTON --- */}
+        {/* --- DESKTOP ENQUIRE --- */}
         <div className="hidden md:block">
           <a 
             href={`https://wa.me/${siteConfig.whatsappNumber}`}
-            className="px-8 py-3 rounded-full bg-white text-black text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-transform"
+            className="px-8 py-3 rounded-full bg-white text-black text-[10px] font-black uppercase tracking-widest hover:bg-[#D4AF37] hover:text-white transition-all duration-300"
           >
             Enquire
           </a>
         </div>
 
-        {/* --- MOBILE TOGGLE --- */}
+        {/* --- MOBILE TOGGLE: Refined Hamburger --- */}
         <button 
-          className="relative z-[110] md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5"
+          className="relative z-[110] md:hidden w-8 h-8 flex flex-col items-center justify-center gap-1.5 focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle Menu"
         >
-          <div className={`w-6 h-0.5 bg-white transition-all ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
-          <div className={`w-6 h-0.5 bg-white transition-all ${isOpen ? 'opacity-0' : ''}`} />
-          <div className={`w-6 h-0.5 bg-white transition-all ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
+          <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`} />
+          <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
         </button>
       </div>
 
-      {/* --- MOBILE MENU OVERLAY --- */}
-      <div className={`fixed inset-0 bg-black z-[105] flex flex-col items-center justify-center transition-all duration-700 ease-in-out ${
-        isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+      {/* --- MOBILE MENU OVERLAY: Better spacing & text handling --- */}
+      <div className={`fixed inset-0 bg-[#080808] z-[105] flex flex-col items-center justify-center transition-all duration-700 ease-in-out ${
+        isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
-        <div className="flex flex-col items-center gap-8">
-          {navLinks.map((link) => (
+        <div className="flex flex-col items-center gap-6 md:gap-8 text-center px-10">
+          <p className="text-[#D4AF37] text-[10px] font-black uppercase tracking-[0.4em] mb-4 opacity-60">Navigation</p>
+          {navLinks.map((link, idx) => (
             <Link
               key={link.name}
               to={link.path}
               onClick={() => setIsOpen(false)}
-              className="text-4xl font-light tracking-tighter text-white hover:italic transition-all"
+              style={{ transitionDelay: `${idx * 100}ms` }}
+              className={`text-3xl font-light tracking-tighter text-white transition-all duration-500 ${
+                isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+              }`}
             >
               {link.name}
             </Link>
           ))}
-          <a 
-            href={`https://wa.me/${siteConfig.whatsappNumber}`}
-            className="mt-8 px-12 py-5 rounded-full border border-white/20 text-white uppercase text-xs tracking-widest"
-          >
-            WhatsApp Concierge
-          </a>
+          
+          <div className={`mt-10 transition-all duration-700 delay-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
+            <a 
+              href={`https://wa.me/${siteConfig.whatsappNumber}`}
+              className="px-10 py-4 rounded-full bg-[#D4AF37] text-black font-black uppercase text-[10px] tracking-widest"
+            >
+              Contact Concierge
+            </a>
+          </div>
         </div>
         
-        {/* Subtle background text for mobile menu */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[10vw] font-black text-white/5 whitespace-nowrap pointer-events-none uppercase">
-          {siteConfig.name} 
+        {/* Background Decorative Text */}
+        <div className="absolute bottom-10 w-full text-center overflow-hidden pointer-events-none">
+          <span className="text-[15vw] font-black text-white/[0.03] uppercase whitespace-nowrap">
+            {siteConfig.name}
+          </span>
         </div>
       </div>
     </nav>
